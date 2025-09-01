@@ -10,3 +10,13 @@ void Algorithm::bubbleSort(std::vector<float>& nums, Callback onChange) {
         }
     }
 }
+
+void quicksort(std::vector<float>& nums) {
+    
+}
+
+int quicksort_recursive(std::vector<float>& nums, int low, int high) {
+    if (low < high) {
+
+    }
+}
