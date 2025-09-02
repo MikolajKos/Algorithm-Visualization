@@ -45,6 +45,7 @@ int main()
 		std::mt19937 g(r());
 		std::shuffle(nums.begin(), nums.end(), g);
 
+		//Initial draw
 		vis.draw(nums);
 
 		auto callback = [&](const std::vector<float>& arr) {
