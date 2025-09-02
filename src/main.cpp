@@ -21,9 +21,11 @@ int main()
 		std::cout << "3. Selection Sort\n";
 		std::cout << "4. Quick Sort\n";
 		std::cout << "5. Heap Sort\n";
-		std::cout << "0. Exit\n\n";
+		std::cout << "0. Exit\n";
 
+		std::cout << "Enter number (0-5): ";
 		std::cin >> selectedOption;
+		std::cout << "\n";
 
 		if (selectedOption == 0)
 			break;
@@ -51,7 +53,7 @@ int main()
 
 				static int counter = 0;
 
-				if (++counter % 100 == 0) {
+				if (++counter % 50 == 0) {
 					vis.draw(arr);
 					std::this_thread::sleep_for(std::chrono::milliseconds(100));
 				}
@@ -64,6 +66,12 @@ int main()
 		{
 		case 1:
 			alg.bubbleSort(nums, callback);
+			break;
+		case 2:
+			alg.insertionSort(nums, callback);
+			break;
+		case 3:
+			alg.selectionSort(nums, callback);
 			break;
 		case 4:
 			alg.quicksort(nums, callback);
