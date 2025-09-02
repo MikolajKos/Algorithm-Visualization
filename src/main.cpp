@@ -13,65 +13,73 @@
 
 int main()
 {
-	std::cout << "Choose algorithm:\n";
-	std::cout << "1. Bubble Sort\n";
-	std::cout << "2. Insertion Sort\n";
-	std::cout << "3. Selection Sort\n";
-	std::cout << "4. Quick Sort\n";
-	std::cout << "5. Heap Sort\n";
-	std::cout << "0. Exit\n\n";
+	int selectedOption = -1;
+	while (selectedOption != 0) {
+		std::cout << "Choose algorithm:\n";
+		std::cout << "1. Bubble Sort\n";
+		std::cout << "2. Insertion Sort\n";
+		std::cout << "3. Selection Sort\n";
+		std::cout << "4. Quick Sort\n";
+		std::cout << "5. Heap Sort\n";
+		std::cout << "0. Exit\n\n";
 
-	int selectedOption = 0;
-	std::cin >> selectedOption;
+		std::cin >> selectedOption;
 
-	Visualizer vis(WIDTH, HEIGHT, BARS_COUNT);
+		if (selectedOption == 0)
+			break;
 
-	// Data
-	std::vector<float> nums(BARS_COUNT);
-	float dt = HEIGHT / BARS_COUNT;
+		Visualizer vis(WIDTH, HEIGHT, BARS_COUNT);
 
-	// Fill vector
-	for (size_t i = 0; i < nums.capacity(); ++i)
-		nums[i] = (i + 1) * dt;
+		// Data
+		std::vector<float> nums(BARS_COUNT);
+		float dt = HEIGHT / BARS_COUNT;
 
-	// Randomize data order
-	std::random_device r;
-	std::mt19937 g(r());
-	std::shuffle(nums.begin(), nums.end(), g);
+		// Fill vector
+		for (size_t i = 0; i < nums.capacity(); ++i)
+			nums[i] = (i + 1) * dt;
 
-	vis.draw(nums);
+		// Randomize data order
+		std::random_device r;
+		std::mt19937 g(r());
+		std::shuffle(nums.begin(), nums.end(), g);
 
-	auto callback = [&](const std::vector<float>& arr) {
-		vis.handleEvents();
-		
-		static int counter = 0;
-
-		if (++counter % 100 == 0) {
-			vis.draw(arr);
-			std::this_thread::sleep_for(std::chrono::milliseconds(1));
-		}
-	};
-
-	Algorithm alg;
-
-	switch (selectedOption)
-	{
-	case 1:
-		alg.bubbleSort(nums, callback);
-		break;
-	case 4:
-		alg.quicksort(nums, callback);
-		break;
-	case 0:
-		return 0;
-	default:
-		break;
-	}
-
-	while (vis.isOpen())
-	{
-		vis.handleEvents();
 		vis.draw(nums);
+
+		auto callback = [&](const std::vector<float>& arr) {
+			if (vis.isOpen()) {
+				vis.handleEvents();
+
+				static int counter = 0;
+
+				if (++counter % 100 == 0) {
+					vis.draw(arr);
+					std::this_thread::sleep_for(std::chrono::milliseconds(100));
+				}
+			}
+		};
+
+		Algorithm alg;
+
+		switch (selectedOption)
+		{
+		case 1:
+			alg.bubbleSort(nums, callback);
+			break;
+		case 4:
+			alg.quicksort(nums, callback);
+			break;
+		case 0:
+			return 0;
+		default:
+			break;
+		}
+
+		while (vis.isOpen())
+		{
+			vis.handleEvents();
+			vis.draw(nums);
+		}
+
 	}
 
 	return 0;
