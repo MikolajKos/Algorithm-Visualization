@@ -7,8 +7,8 @@
 #include "includes/Visualizer.hpp"
 #include "includes/Algorithm.hpp"
 
-#define WIDTH 800.0f
-#define HEIGHT 600.0f
+#define WIDTH 1900.0f
+#define HEIGHT 1200.0f
 #define BARS_COUNT 500
 
 int main()
@@ -46,8 +46,9 @@ int main()
 		
 		static int counter = 0;
 
-		if (++counter % 500 == 0) {
+		if (++counter % 100 == 0) {
 			vis.draw(arr);
+			std::this_thread::sleep_for(std::chrono::milliseconds(1));
 		}
 	};
 
@@ -57,6 +58,9 @@ int main()
 	{
 	case 1:
 		alg.bubbleSort(nums, callback);
+		break;
+	case 4:
+		alg.quicksort(nums, callback);
 		break;
 	case 0:
 		return 0;
