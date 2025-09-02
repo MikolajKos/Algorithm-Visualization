@@ -20,10 +20,10 @@ int main()
 		std::cout << "2. Insertion Sort\n";
 		std::cout << "3. Selection Sort\n";
 		std::cout << "4. Quick Sort\n";
-		std::cout << "5. Heap Sort\n";
+		//std::cout << "5. Heap Sort\n";
 		std::cout << "0. Exit\n";
 
-		std::cout << "Enter number (0-5): ";
+		std::cout << "Enter number (0-4): ";
 		std::cin >> selectedOption;
 		std::cout << "\n";
 
@@ -53,9 +53,9 @@ int main()
 
 				static int counter = 0;
 
-				if (++counter % 50 == 0) {
+				// Drawing every hundredth swap action for greater faster visualization
+				if (++counter % 100 == 0) {
 					vis.draw(arr);
-					std::this_thread::sleep_for(std::chrono::milliseconds(100));
 				}
 			}
 		};
